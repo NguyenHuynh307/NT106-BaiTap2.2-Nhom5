@@ -50,3 +50,38 @@ https://github.com/phu529/Health_Information_Lockup_System
 ## 7. Trạng thái hoàn thành
 
 Không đánh dấu chức năng hoặc ca kiểm thử là hoàn thành khi chưa có kết quả kiểm tra thực tế. Các lỗi, thay đổi thiết kế và kết quả kiểm thử phải được ghi nhận trong tài liệu báo cáo/nhật ký của nhóm.
+
+## Phần việc Bước 1 — Nhóm trưởng
+
+### Mục tiêu
+
+Tạo bộ khung C# Windows Forms tối thiểu để xác nhận solution có thể restore, build và khởi chạy trên máy phát triển. Đây là nền tảng ban đầu, chưa phải ứng dụng hoàn chỉnh theo PDF 2.2.
+
+### Các file thuộc Bước 1
+
+- `.gitignore`: loại trừ file build, file cấu hình cục bộ có thể chứa thông tin nhạy cảm, và dữ liệu SQL/bản sao lưu; cho phép theo dõi file cấu hình mẫu `appsettings.example.json`.
+- `NT106-BaiTap2.2-Nhom5.sln`: solution dùng để quản lý project của bài tập.
+- `src/QuanLyNguoiDung/QuanLyNguoiDung.csproj`: khai báo project Windows Forms, dùng `net10.0-windows`.
+- `src/QuanLyNguoiDung/Program.cs`: điểm khởi chạy ứng dụng, hiện mở một cửa sổ WinForms trống để kiểm tra môi trường.
+
+### Cách kiểm tra và chạy
+
+Mở PowerShell tại thư mục gốc của repository:
+
+```powershell
+dotnet restore .\NT106-BaiTap2.2-Nhom5.sln
+dotnet build .\NT106-BaiTap2.2-Nhom5.sln --no-restore
+dotnet run --project .\src\QuanLyNguoiDung\QuanLyNguoiDung.csproj
+```
+
+### Kết quả đã kiểm tra trên máy phát triển
+
+- `dotnet restore`: thành công.
+- `dotnet build --no-restore`: thành công.
+- Ứng dụng WinForms mở được cửa sổ trống và đã có ảnh xác nhận.
+
+Kết quả này chỉ xác nhận bộ khung khởi chạy được trên môi trường đã kiểm tra; chưa chứng minh các chức năng đăng ký, đăng nhập hoặc SQL hoạt động.
+
+### Phạm vi chưa triển khai trong Bước 1
+
+Bước này chưa tạo form Đăng nhập, Đăng ký, lớp truy cập dữ liệu, lớp băm mật khẩu hoặc script tạo database. Không tự ý thay đổi giao diện và đồ họa của Starter đã cung cấp. Công việc của các thành viên ở bước sau sẽ được tích hợp sau khi rà soát để tránh ghi đè source của nhau.
