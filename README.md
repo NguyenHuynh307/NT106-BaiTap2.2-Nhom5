@@ -10,11 +10,6 @@ Repository này dành riêng cho Bài tập 2.2, không phải repository sản 
 
 Theo PDF 2.2, ứng dụng bài tập kết nối trực tiếp tới SQL Server để giảm khối lượng triển khai. Mã truy vấn cơ sở dữ liệu phải được tách khỏi hàm xử lý sự kiện của giao diện.
 
-Đối với đồ án cuối kỳ Hệ thống tra cứu triệu chứng và thông tin sức khỏe, client giao tiếp với server qua mạng; chỉ server được truy cập cơ sở dữ liệu.
-
-Không tự ý đẩy mã hoặc thực hiện thay đổi trên repository đồ án cuối kỳ:
-https://github.com/phu529/Health_Information_Lockup_System
-
 ## 3. Yêu cầu chính theo PDF 2.2
 
 - Có ba form: Đăng nhập, Đăng ký và Chính.
