@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
+using QuanLyNguoiDung.Data;
 
 namespace QuanLyNguoiDung
 {
     public partial class FormDangKi : Form
     {
+        private readonly IUserRepository _userRepository = new UserRepository();
+
         public FormDangKi()
         {
             InitializeComponent();
+            btnDangKy.Click += btnDangKy_Click;
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
@@ -23,6 +22,51 @@ namespace QuanLyNguoiDung
         private void lnkLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnDangKy_Click(object sender, EventArgs e)
+        {
+            string tenDangNhap = txtUsername.Text.Trim();
+            string matKhau = txtPassword.Text.Trim();
+            string xacNhanMatKhau = txtConfirmPassword.Text.Trim();
+            string hoTen = txtFullName.Text.Trim();
+            string email = txtEmail.Text.Trim();
+
+            if (string.IsNullOrEmpty(tenDangNhap) || string.IsNullOrEmpty(matKhau))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ Tên đăng nhập và Mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (matKhau != xacNhanMatKhau)
+            {
+                MessageBox.Show("Mật khẩu xác nhận không khớp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (_userRepository.KiemTraTonTai(tenDangNhap))
+            {
+                MessageBox.Show("Tên đăng nhập đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            NguoiDung nguoiDungMoi = new NguoiDung
+            {
+                TenDangNhap = tenDangNhap,
+                MatKhau = matKhau,
+                HoTen = hoTen,
+                Email = email
+            };
+
+            if (_userRepository.DangKyNguoiDung(nguoiDungMoi))
+            {
+                MessageBox.Show("Đăng ký tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Đăng ký thất bại, vui lòng thử lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
