@@ -1,4 +1,3 @@
-
 # Build outputs
 [Bb]in/
 [Oo]bj/
@@ -20,17 +19,20 @@ coverage/
 project.lock.json
 project.fragment.lock.json
 
-# Local configuration and secrets
+# Local environment and secrets
 .env
 .env.*
 !.env.example
-appsettings.Development.json
-appsettings.Local.json
-appsettings.*.Local.json
-*.secrets.json
-secrets.json
-connectionstrings.local.json
-ConnectionStrings.local.json
+
+# Local application settings and credentials
+**/appsettings*.json
+**/*.secrets.json
+**/secrets.json
+**/connectionstrings.local.json
+**/ConnectionStrings.local.json
+
+# Allow safe example settings to be committed
+!**/appsettings.example.json
 
 # SQL Server local database and backups
 *.mdf
