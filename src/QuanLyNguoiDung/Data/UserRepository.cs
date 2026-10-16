@@ -31,7 +31,7 @@ namespace QuanLyNguoiDung.Data
             }
         }
 
-        public bool DangKyNguoiDung(NguoiDung nguoiDung)
+        public async Task<bool> DangKyNguoiDung(NguoiDung nguoiDung)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -42,14 +42,14 @@ namespace QuanLyNguoiDung.Data
                     cmd.Parameters.AddWithValue("@MatKhau", nguoiDung.MatKhau);
                     cmd.Parameters.AddWithValue("@HoTen", nguoiDung.HoTen);
                     cmd.Parameters.AddWithValue("@Email", nguoiDung.Email);
-                    conn.Open();
-                    int rows = cmd.ExecuteNonQuery();
+                    await conn.OpenAsync();
+                    int rows = await cmd.ExecuteNonQueryAsync();
                     return rows > 0;
                 }
             }
         }
 
-        public bool KiemTraTonTai(string tenDangNhap)
+        public async Task<bool> KiemTraTonTai(string tenDangNhap)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -57,8 +57,8 @@ namespace QuanLyNguoiDung.Data
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
-                    conn.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                     await conn.OpenAsync();
+                    int count = Convert.ToInt32(cmd.ExecuteScalarAsync());
                     return count > 0;
                 }
             }

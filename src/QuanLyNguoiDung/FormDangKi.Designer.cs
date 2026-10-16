@@ -40,38 +40,30 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-
             panelTitle = new Guna.UI2.WinForms.Guna2Panel();
             lblTitle = new Label();
             guna2ControlBoxClose = new Guna.UI2.WinForms.Guna2ControlBox();
             guna2ControlBoxMaximize = new Guna.UI2.WinForms.Guna2ControlBox();
             guna2ControlBoxMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
-
             lblUsername = new Label();
             txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
             lblUsernameError = new Label();
-
             lblPassword = new Label();
             txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
             lblPasswordError = new Label();
-
             lblConfirmPassword = new Label();
             txtConfirmPassword = new Guna.UI2.WinForms.Guna2TextBox();
             lblConfirmPasswordError = new Label();
-
             lblFullName = new Label();
             txtFullName = new Guna.UI2.WinForms.Guna2TextBox();
             lblFullNameError = new Label();
-
             lblEmail = new Label();
             txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
             lblEmailError = new Label();
-
             btnHuy = new Guna.UI2.WinForms.Guna2Button();
             btnDangKy = new Guna.UI2.WinForms.Guna2Button();
             lnkLogin = new LinkLabel();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
-
             panelTitle.SuspendLayout();
             SuspendLayout();
             // 
@@ -148,7 +140,7 @@
             lblUsername.ForeColor = Color.FromArgb(17, 24, 39);
             lblUsername.Location = new Point(100, 55);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(119, 21);
+            lblUsername.Size = new Size(123, 21);
             lblUsername.TabIndex = 1;
             lblUsername.Text = "Tên đăng nhập";
             // 
@@ -178,7 +170,7 @@
             lblUsernameError.ForeColor = Color.FromArgb(220, 38, 38);
             lblUsernameError.Location = new Point(100, 117);
             lblUsernameError.Name = "lblUsernameError";
-            lblUsernameError.Size = new Size(224, 20);
+            lblUsernameError.Size = new Size(251, 20);
             lblUsernameError.TabIndex = 3;
             lblUsernameError.Text = "Tên đăng nhập không được để trống";
             // 
@@ -220,7 +212,7 @@
             lblPasswordError.ForeColor = Color.FromArgb(220, 38, 38);
             lblPasswordError.Location = new Point(100, 204);
             lblPasswordError.Name = "lblPasswordError";
-            lblPasswordError.Size = new Size(183, 20);
+            lblPasswordError.Size = new Size(214, 20);
             lblPasswordError.TabIndex = 6;
             lblPasswordError.Text = "Mật khẩu không được để trống";
             // 
@@ -231,7 +223,7 @@
             lblConfirmPassword.ForeColor = Color.FromArgb(17, 24, 39);
             lblConfirmPassword.Location = new Point(100, 229);
             lblConfirmPassword.Name = "lblConfirmPassword";
-            lblConfirmPassword.Size = new Size(153, 21);
+            lblConfirmPassword.Size = new Size(156, 21);
             lblConfirmPassword.TabIndex = 7;
             lblConfirmPassword.Text = "Xác nhận mật khẩu";
             // 
@@ -262,7 +254,7 @@
             lblConfirmPasswordError.ForeColor = Color.FromArgb(220, 38, 38);
             lblConfirmPasswordError.Location = new Point(100, 291);
             lblConfirmPasswordError.Name = "lblConfirmPasswordError";
-            lblConfirmPasswordError.Size = new Size(158, 20);
+            lblConfirmPasswordError.Size = new Size(191, 20);
             lblConfirmPasswordError.TabIndex = 9;
             lblConfirmPasswordError.Text = "Vui lòng xác nhận mật khẩu";
             // 
@@ -273,7 +265,7 @@
             lblFullName.ForeColor = Color.FromArgb(17, 24, 39);
             lblFullName.Location = new Point(100, 316);
             lblFullName.Name = "lblFullName";
-            lblFullName.Size = new Size(82, 21);
+            lblFullName.Size = new Size(83, 21);
             lblFullName.TabIndex = 10;
             lblFullName.Text = "Họ và tên";
             // 
@@ -303,7 +295,7 @@
             lblFullNameError.ForeColor = Color.FromArgb(220, 38, 38);
             lblFullNameError.Location = new Point(100, 378);
             lblFullNameError.Name = "lblFullNameError";
-            lblFullNameError.Size = new Size(160, 20);
+            lblFullNameError.Size = new Size(198, 20);
             lblFullNameError.TabIndex = 12;
             lblFullNameError.Text = "Họ tên không được để trống";
             // 
@@ -314,7 +306,7 @@
             lblEmail.ForeColor = Color.FromArgb(17, 24, 39);
             lblEmail.Location = new Point(100, 403);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(183, 21);
+            lblEmail.Size = new Size(189, 21);
             lblEmail.TabIndex = 13;
             lblEmail.Text = "Email (không bắt buộc)";
             // 
@@ -377,6 +369,7 @@
             btnDangKy.Size = new Size(130, 40);
             btnDangKy.TabIndex = 17;
             btnDangKy.Text = "Đăng ký";
+            btnDangKy.Click += btnDangKy_Click_1;
             // 
             // lnkLogin
             // 
