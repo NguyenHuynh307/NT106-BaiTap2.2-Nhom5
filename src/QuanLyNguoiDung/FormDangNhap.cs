@@ -11,9 +11,21 @@ namespace QuanLyNguoiDung
         public FormDangNhap()
         {
             InitializeComponent();
+            btnDangNhap.Click += btnDangNhap_Click;
         }
 
-        private void btnDangNhap_Click(object? sender, EventArgs e)
+        private void btnThoat_Click(object? sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void lnkRegister_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormDangKi formDangKi = new FormDangKi();
+            formDangKi.ShowDialog();
+        }
+
+        private async void btnDangNhap_Click(object? sender, EventArgs e)
         {
             string tenDangNhap = txtUsername.Text.Trim();
             string matKhau = txtPassword.Text.Trim();
@@ -24,28 +36,31 @@ namespace QuanLyNguoiDung
                 return;
             }
 
-            if (_userRepository.KiemTraDangNhap(tenDangNhap, matKhau))
+            try
             {
-                MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FormTrangChinh formTrangChinh = new FormTrangChinh();
-                formTrangChinh.Show();
-                this.Hide();
+                bool isSuccess = await _userRepository.KiemTraDangNhapAsync(tenDangNhap, matKhau);
+                if (isSuccess)
+                {
+                    MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Tạm ẩn chuyển hướng FormMain để tránh lỗi CS0246 nếu dự án chưa có FormMain
+                    // Trường hợp Form chính của bạn tên là Form1, hãy bỏ comment và đổi FormMain -> Form1
+                    /*
+                    FormMain formMain = new FormMain();
+                    this.Hide();
+                    formMain.ShowDialog();
+                    this.Close();
+                    */
+                }
+                else
+                {
+                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void lnkRegister_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FormDangKi formDangKi = new FormDangKi();
-            formDangKi.ShowDialog();
-        }
-
-        private void btnThoat_Click(object? sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

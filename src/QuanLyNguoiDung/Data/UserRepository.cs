@@ -1,94 +1,236 @@
 ﻿using System;
+using System.Data;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 
 namespace QuanLyNguoiDung.Data
 {
     public class UserRepository : IUserRepository
     {
-  
-        private readonly string _connectionString = @"Data Source=.;Initial Catalog=QuanLyNguoiDungDB;Integrated Security=True;TrustServerCertificate=True;";
+        private readonly string _connectionString;
 
-        public UserRepository() { }
+        public UserRepository()
+        {
+            _connectionString = LoadConnectionString();
+        }
 
         public UserRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public bool KiemTraDangNhap(string tenDangNhap, string matKhau)
+        private static string LoadConnectionString()
         {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            try
             {
-                string query = "SELECT COUNT(1) FROM NguoiDung WHERE TenDangNhap = @TenDangNhap AND MatKhau = @MatKhau";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
+                if (File.Exists(filePath))
                 {
-                    cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
-                    cmd.Parameters.AddWithValue("@MatKhau", matKhau);
-                    conn.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
-            }
-        }
-
-        public bool DangKyNguoiDung(NguoiDung nguoiDung)
-        {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                string query = "INSERT INTO NguoiDung (TenDangNhap, MatKhau, HoTen, Email) VALUES (@TenDangNhap, @MatKhau, @HoTen, @Email)";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@TenDangNhap", nguoiDung.TenDangNhap);
-                    cmd.Parameters.AddWithValue("@MatKhau", nguoiDung.MatKhau);
-                    cmd.Parameters.AddWithValue("@HoTen", nguoiDung.HoTen);
-                    cmd.Parameters.AddWithValue("@Email", nguoiDung.Email);
-                    conn.Open();
-                    int rows = cmd.ExecuteNonQuery();
-                    return rows > 0;
-                }
-            }
-        }
-
-        public bool KiemTraTonTai(string tenDangNhap)
-        {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                string query = "SELECT COUNT(1) FROM NguoiDung WHERE TenDangNhap = @TenDangNhap";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
-                    conn.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
-            }
-        }
-
-        public NguoiDung? GetByTenDangNhap(string tenDangNhap)
-        {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                string query = "SELECT TenDangNhap, MatKhau, HoTen, Email FROM NguoiDung WHERE TenDangNhap = @TenDangNhap";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
-                    conn.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    string jsonText = File.ReadAllText(filePath);
+                    using (JsonDocument document = JsonDocument.Parse(jsonText))
                     {
-                        if (reader.Read())
+                        if (document.RootElement.TryGetProperty("ConnectionStrings", out JsonElement connSection) &&
+                            connSection.TryGetProperty("DefaultConnection", out JsonElement connString))
                         {
-                            return new NguoiDung
+                            string? value = connString.GetString();
+                            if (!string.IsNullOrWhiteSpace(value))
                             {
-                                TenDangNhap = reader["TenDangNhap"].ToString() ?? "",
-                                MatKhau = reader["MatKhau"].ToString() ?? "",
-                                HoTen = reader["HoTen"].ToString() ?? "",
-                                Email = reader["Email"].ToString() ?? ""
-                            };
+                                return value;
+                            }
                         }
                     }
                 }
             }
-            return null;
+            catch
+            {
+            }
+            return @"Server=.;Database=QuanLyNguoiDung;Trusted_Connection=True;TrustServerCertificate=True;";
+        }
+
+        private static string GenerateSalt()
+        {
+            byte[] saltBytes = new byte[16];
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(saltBytes);
+            }
+            return Convert.ToBase64String(saltBytes);
+        }
+
+        private static string HashPassword(string password, string salt)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] combinedBytes = Encoding.UTF8.GetBytes(password + salt);
+                byte[] hashBytes = sha256.ComputeHash(combinedBytes);
+                return Convert.ToBase64String(hashBytes);
+            }
+        }
+
+        private static bool VerifyPassword(string password, string salt, string hash)
+        {
+            string calculatedHash = HashPassword(password, salt);
+            return string.Equals(calculatedHash, hash, StringComparison.Ordinal);
+        }
+
+        private static Exception HandleSqlException(SqlException ex)
+        {
+            if (ex.Number == 2627 || ex.Number == 2601)
+            {
+                return new Exception("Tên đăng nhập hoặc dữ liệu đã tồn tại trong hệ thống!");
+            }
+            if (ex.Number == -1 || ex.Number == 2 || ex.Number == 53)
+            {
+                return new Exception("Mất kết nối với máy chủ SQL Server. Vui lòng kiểm tra lại dịch vụ CSDL!");
+            }
+            return new Exception("Đã xảy ra lỗi khi truy vấn cơ sở dữ liệu. Vui lòng thử lại sau!");
+        }
+
+        public async Task<bool> KiemTraTonTaiAsync(string tenDangNhap)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    string query = "SELECT COUNT(1) FROM NguoiDung WHERE TenDangNhap = @TenDangNhap";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
+                        await conn.OpenAsync();
+                        object? result = await cmd.ExecuteScalarAsync();
+                        return Convert.ToInt32(result) > 0;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
+
+        public async Task<bool> DangKyNguoiDungAsync(NguoiDung nguoiDung, string matKhauTho)
+        {
+            try
+            {
+                string salt = GenerateSalt();
+                string matKhauBam = HashPassword(matKhauTho, salt);
+
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    string query = "INSERT INTO NguoiDung (TenDangNhap, Salt, MatKhauBam, HoTen, Email, NgayTao) VALUES (@TenDangNhap, @Salt, @MatKhauBam, @HoTen, @Email, GETDATE())";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = nguoiDung.TenDangNhap;
+                        cmd.Parameters.Add("@Salt", SqlDbType.NVarChar, 100).Value = salt;
+                        cmd.Parameters.Add("@MatKhauBam", SqlDbType.NVarChar, 256).Value = matKhauBam;
+                        cmd.Parameters.Add("@HoTen", SqlDbType.NVarChar, 100).Value = (object?)nguoiDung.HoTen ?? DBNull.Value;
+                        cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = (object?)nguoiDung.Email ?? DBNull.Value;
+
+                        await conn.OpenAsync();
+                        int rows = await cmd.ExecuteNonQueryAsync();
+                        return rows > 0;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
+
+        public async Task<NguoiDung?> GetByTenDangNhapAsync(string tenDangNhap)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    string query = "SELECT TenDangNhap, Salt, MatKhauBam, HoTen, Email, NgayTao, LanDangNhapCuoi FROM NguoiDung WHERE TenDangNhap = @TenDangNhap";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                return new NguoiDung
+                                {
+                                    TenDangNhap = reader["TenDangNhap"].ToString() ?? string.Empty,
+                                    Salt = reader["Salt"].ToString() ?? string.Empty,
+                                    MatKhauBam = reader["MatKhauBam"].ToString() ?? string.Empty,
+                                    HoTen = reader["HoTen"].ToString() ?? string.Empty,
+                                    Email = reader["Email"] != DBNull.Value ? reader["Email"].ToString() : null,
+                                    NgayTao = reader["NgayTao"] != DBNull.Value ? Convert.ToDateTime(reader["NgayTao"]) : null,
+                                    LanDangNhapCuoi = reader["LanDangNhapCuoi"] != DBNull.Value ? Convert.ToDateTime(reader["LanDangNhapCuoi"]) : null
+                                };
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
+
+        public async Task<bool> CapNhatLanDangNhapCuoiAsync(string tenDangNhap)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    string query = "UPDATE NguoiDung SET LanDangNhapCuoi = GETDATE() WHERE TenDangNhap = @TenDangNhap";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@TenDangNhap", SqlDbType.NVarChar, 50).Value = tenDangNhap;
+                        await conn.OpenAsync();
+                        int rows = await cmd.ExecuteNonQueryAsync();
+                        return rows > 0;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw HandleSqlException(ex);
+            }
+        }
+
+        public async Task<bool> KiemTraDangNhapAsync(string tenDangNhap, string matKhau)
+        {
+            NguoiDung? user = await GetByTenDangNhapAsync(tenDangNhap);
+            if (user == null)
+            {
+                return false;
+            }
+
+            bool isValid = VerifyPassword(matKhau, user.Salt, user.MatKhauBam);
+            if (isValid)
+            {
+                await CapNhatLanDangNhapCuoiAsync(tenDangNhap);
+                return true;
+            }
+            return false;
+        }
+
+        public bool KiemTraTonTai(string tenDangNhap)
+        {
+            return KiemTraTonTaiAsync(tenDangNhap).GetAwaiter().GetResult();
+        }
+
+        public bool DangKyNguoiDung(NguoiDung nguoiDung, string matKhauTho)
+        {
+            return DangKyNguoiDungAsync(nguoiDung, matKhauTho).GetAwaiter().GetResult();
+        }
+
+        public bool KiemTraDangNhap(string tenDangNhap, string matKhau)
+        {
+            return KiemTraDangNhapAsync(tenDangNhap, matKhau).GetAwaiter().GetResult();
         }
     }
 }

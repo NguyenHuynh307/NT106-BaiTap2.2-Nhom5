@@ -14,17 +14,17 @@ namespace QuanLyNguoiDung
             btnDangKy.Click += btnDangKy_Click;
         }
 
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnHuy_Click(object? sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void lnkLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkLogin_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Close();
         }
 
-        private void btnDangKy_Click(object sender, EventArgs e)
+        private async void btnDangKy_Click(object? sender, EventArgs e)
         {
             string tenDangNhap = txtUsername.Text.Trim();
             string matKhau = txtPassword.Text.Trim();
@@ -44,28 +44,34 @@ namespace QuanLyNguoiDung
                 return;
             }
 
-            if (_userRepository.KiemTraTonTai(tenDangNhap))
+            try
             {
-                MessageBox.Show("Tên đăng nhập đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                if (await _userRepository.KiemTraTonTaiAsync(tenDangNhap))
+                {
+                    MessageBox.Show("Tên đăng nhập đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            NguoiDung nguoiDungMoi = new NguoiDung
-            {
-                TenDangNhap = tenDangNhap,
-                MatKhau = matKhau,
-                HoTen = hoTen,
-                Email = email
-            };
+                NguoiDung nguoiDungMoi = new NguoiDung
+                {
+                    TenDangNhap = tenDangNhap,
+                    HoTen = hoTen,
+                    Email = email
+                };
 
-            if (_userRepository.DangKyNguoiDung(nguoiDungMoi))
-            {
-                MessageBox.Show("Đăng ký tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                if (await _userRepository.DangKyNguoiDungAsync(nguoiDungMoi, matKhau))
+                {
+                    MessageBox.Show("Đăng ký tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Đăng ký thất bại, vui lòng thử lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Đăng ký thất bại, vui lòng thử lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
