@@ -36,6 +36,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+
             panelTitle = new Guna.UI2.WinForms.Guna2Panel();
             lblTitle = new Label();
             guna2ControlBoxClose = new Guna.UI2.WinForms.Guna2ControlBox();
@@ -48,10 +49,13 @@
             lnkForgotPassword = new LinkLabel();
             chkRemember = new Guna.UI2.WinForms.Guna2CheckBox();
             txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            lblPasswordError = new Label();
             lblPassword = new Label();
             txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
+            lblUsernameError = new Label();
             lblUsername = new Label();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
+
             panelTitle.SuspendLayout();
             pnlContainer.SuspendLayout();
             SuspendLayout();
@@ -131,8 +135,10 @@
             pnlContainer.Controls.Add(lnkForgotPassword);
             pnlContainer.Controls.Add(chkRemember);
             pnlContainer.Controls.Add(txtPassword);
+            pnlContainer.Controls.Add(lblPasswordError);
             pnlContainer.Controls.Add(lblPassword);
             pnlContainer.Controls.Add(txtUsername);
+            pnlContainer.Controls.Add(lblUsernameError);
             pnlContainer.Controls.Add(lblUsername);
             pnlContainer.CustomizableEdges = customizableEdges17;
             pnlContainer.Dock = DockStyle.Fill;
@@ -147,7 +153,7 @@
             lnkRegister.ActiveLinkColor = Color.FromArgb(27, 77, 62);
             lnkRegister.Font = new Font("Segoe UI", 9.5F);
             lnkRegister.LinkColor = Color.FromArgb(27, 111, 108);
-            lnkRegister.Location = new Point(100, 415);
+            lnkRegister.Location = new Point(100, 455);
             lnkRegister.Name = "lnkRegister";
             lnkRegister.Size = new Size(618, 25);
             lnkRegister.TabIndex = 9;
@@ -163,7 +169,7 @@
             btnDangNhap.FillColor = Color.FromArgb(27, 111, 108);
             btnDangNhap.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnDangNhap.ForeColor = Color.White;
-            btnDangNhap.Location = new Point(568, 335);
+            btnDangNhap.Location = new Point(568, 385);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnDangNhap.Size = new Size(150, 45);
@@ -179,7 +185,7 @@
             btnThoat.FillColor = Color.White;
             btnThoat.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnThoat.ForeColor = Color.FromArgb(31, 41, 55);
-            btnThoat.Location = new Point(395, 335);
+            btnThoat.Location = new Point(395, 385);
             btnThoat.Name = "btnThoat";
             btnThoat.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnThoat.Size = new Size(150, 45);
@@ -193,7 +199,7 @@
             lnkForgotPassword.AutoSize = true;
             lnkForgotPassword.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lnkForgotPassword.LinkColor = Color.FromArgb(27, 111, 108);
-            lnkForgotPassword.Location = new Point(573, 276);
+            lnkForgotPassword.Location = new Point(573, 335);
             lnkForgotPassword.Name = "lnkForgotPassword";
             lnkForgotPassword.Size = new Size(134, 21);
             lnkForgotPassword.TabIndex = 6;
@@ -210,7 +216,7 @@
             chkRemember.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
             chkRemember.Font = new Font("Segoe UI", 9.5F);
             chkRemember.ForeColor = Color.FromArgb(55, 65, 81);
-            chkRemember.Location = new Point(100, 275);
+            chkRemember.Location = new Point(100, 335);
             chkRemember.Name = "chkRemember";
             chkRemember.Size = new Size(166, 25);
             chkRemember.TabIndex = 5;
@@ -233,23 +239,34 @@
             txtPassword.Font = new Font("Segoe UI", 10F);
             txtPassword.ForeColor = Color.Black;
             txtPassword.HoverState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtPassword.Location = new Point(100, 210);
+            txtPassword.Location = new Point(100, 215);
             txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.PlaceholderText = "Nhập mật khẩu";
             txtPassword.SelectedText = "";
             txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            txtPassword.Size = new Size(618, 45);
+            txtPassword.Size = new Size(618, 40);
             txtPassword.TabIndex = 4;
             txtPassword.TextOffset = new Point(5, 0);
+            // 
+            // lblPasswordError
+            // 
+            lblPasswordError.AutoSize = true;
+            lblPasswordError.Font = new Font("Segoe UI", 9F);
+            lblPasswordError.ForeColor = Color.FromArgb(220, 38, 38);
+            lblPasswordError.Location = new Point(100, 260);
+            lblPasswordError.Name = "lblPasswordError";
+            lblPasswordError.Size = new Size(168, 20);
+            lblPasswordError.TabIndex = 3;
+            lblPasswordError.Text = "Mật khẩu không được để trống";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblPassword.ForeColor = Color.FromArgb(17, 24, 39);
-            lblPassword.Location = new Point(100, 180);
+            lblPassword.Location = new Point(100, 185);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(86, 23);
             lblPassword.TabIndex = 3;
@@ -268,22 +285,33 @@
             txtUsername.Font = new Font("Segoe UI", 10F);
             txtUsername.ForeColor = Color.Black;
             txtUsername.HoverState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtUsername.Location = new Point(100, 115);
+            txtUsername.Location = new Point(100, 110);
             txtUsername.Margin = new Padding(3, 4, 3, 4);
             txtUsername.Name = "txtUsername";
             txtUsername.PlaceholderText = "Nhập tên đăng nhập";
             txtUsername.SelectedText = "";
             txtUsername.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            txtUsername.Size = new Size(618, 45);
+            txtUsername.Size = new Size(618, 40);
             txtUsername.TabIndex = 2;
             txtUsername.TextOffset = new Point(5, 0);
+            // 
+            // lblUsernameError
+            // 
+            lblUsernameError.AutoSize = true;
+            lblUsernameError.Font = new Font("Segoe UI", 9F);
+            lblUsernameError.ForeColor = Color.FromArgb(220, 38, 38);
+            lblUsernameError.Location = new Point(100, 155);
+            lblUsernameError.Name = "lblUsernameError";
+            lblUsernameError.Size = new Size(205, 20);
+            lblUsernameError.TabIndex = 1;
+            lblUsernameError.Text = "Tên đăng nhập không được để trống";
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
             lblUsername.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblUsername.ForeColor = Color.FromArgb(17, 24, 39);
-            lblUsername.Location = new Point(100, 85);
+            lblUsername.Location = new Point(100, 80);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(128, 23);
             lblUsername.TabIndex = 1;
@@ -324,8 +352,10 @@
         private Label lblTitle;
         private Guna.UI2.WinForms.Guna2Panel pnlContainer;
         private Label lblUsername;
+        private Label lblUsernameError;
         private Guna.UI2.WinForms.Guna2TextBox txtUsername;
         private Label lblPassword;
+        private Label lblPasswordError;
         private Guna.UI2.WinForms.Guna2TextBox txtPassword;
         private Guna.UI2.WinForms.Guna2CheckBox chkRemember;
         private LinkLabel lnkForgotPassword;

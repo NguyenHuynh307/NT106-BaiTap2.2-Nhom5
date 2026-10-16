@@ -2,15 +2,8 @@
 {
     partial class FormDangKi
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -21,6 +14,7 @@
         }
 
         #region Windows Form Designer generated code
+
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
@@ -46,25 +40,38 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+
             panelTitle = new Guna.UI2.WinForms.Guna2Panel();
             lblTitle = new Label();
             guna2ControlBoxClose = new Guna.UI2.WinForms.Guna2ControlBox();
             guna2ControlBoxMaximize = new Guna.UI2.WinForms.Guna2ControlBox();
             guna2ControlBoxMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
+
             lblUsername = new Label();
             txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
+            lblUsernameError = new Label();
+
             lblPassword = new Label();
             txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            lblPasswordError = new Label();
+
             lblConfirmPassword = new Label();
             txtConfirmPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            lblConfirmPasswordError = new Label();
+
             lblFullName = new Label();
             txtFullName = new Guna.UI2.WinForms.Guna2TextBox();
+            lblFullNameError = new Label();
+
             lblEmail = new Label();
             txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
+            lblEmailError = new Label();
+
             btnHuy = new Guna.UI2.WinForms.Guna2Button();
             btnDangKy = new Guna.UI2.WinForms.Guna2Button();
             lnkLogin = new LinkLabel();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
+
             panelTitle.SuspendLayout();
             SuspendLayout();
             // 
@@ -137,11 +144,11 @@
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblUsername.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblUsername.ForeColor = Color.FromArgb(17, 24, 39);
-            lblUsername.Location = new Point(100, 65);
+            lblUsername.Location = new Point(100, 55);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(128, 23);
+            lblUsername.Size = new Size(119, 21);
             lblUsername.TabIndex = 1;
             lblUsername.Text = "Tên đăng nhập";
             // 
@@ -151,28 +158,39 @@
             txtUsername.CustomizableEdges = customizableEdges9;
             txtUsername.DefaultText = "";
             txtUsername.FocusedState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtUsername.Font = new Font("Segoe UI", 10F);
+            txtUsername.Font = new Font("Segoe UI", 9.5F);
             txtUsername.ForeColor = Color.Black;
             txtUsername.HoverState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtUsername.Location = new Point(100, 93);
+            txtUsername.Location = new Point(100, 80);
             txtUsername.Margin = new Padding(3, 4, 3, 4);
             txtUsername.Name = "txtUsername";
             txtUsername.PlaceholderText = "3-20 ký tự, không dấu, không trùng";
             txtUsername.SelectedText = "";
             txtUsername.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            txtUsername.Size = new Size(618, 40);
+            txtUsername.Size = new Size(618, 35);
             txtUsername.TabIndex = 2;
             txtUsername.TextOffset = new Point(5, 0);
+            // 
+            // lblUsernameError
+            // 
+            lblUsernameError.AutoSize = true;
+            lblUsernameError.Font = new Font("Segoe UI", 8.5F);
+            lblUsernameError.ForeColor = Color.FromArgb(220, 38, 38);
+            lblUsernameError.Location = new Point(100, 117);
+            lblUsernameError.Name = "lblUsernameError";
+            lblUsernameError.Size = new Size(224, 20);
+            lblUsernameError.TabIndex = 3;
+            lblUsernameError.Text = "Tên đăng nhập không được để trống";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblPassword.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblPassword.ForeColor = Color.FromArgb(17, 24, 39);
-            lblPassword.Location = new Point(100, 143);
+            lblPassword.Location = new Point(100, 142);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(86, 23);
-            lblPassword.TabIndex = 3;
+            lblPassword.Size = new Size(82, 21);
+            lblPassword.TabIndex = 4;
             lblPassword.Text = "Mật khẩu";
             // 
             // txtPassword
@@ -181,29 +199,40 @@
             txtPassword.CustomizableEdges = customizableEdges11;
             txtPassword.DefaultText = "";
             txtPassword.FocusedState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtPassword.Font = new Font("Segoe UI", 10F);
+            txtPassword.Font = new Font("Segoe UI", 9.5F);
             txtPassword.ForeColor = Color.Black;
             txtPassword.HoverState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtPassword.Location = new Point(100, 171);
+            txtPassword.Location = new Point(100, 167);
             txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.PlaceholderText = "Tối thiểu 8 ký tự, có chữ và số";
             txtPassword.SelectedText = "";
             txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtPassword.Size = new Size(618, 40);
-            txtPassword.TabIndex = 4;
+            txtPassword.Size = new Size(618, 35);
+            txtPassword.TabIndex = 5;
             txtPassword.TextOffset = new Point(5, 0);
+            // 
+            // lblPasswordError
+            // 
+            lblPasswordError.AutoSize = true;
+            lblPasswordError.Font = new Font("Segoe UI", 8.5F);
+            lblPasswordError.ForeColor = Color.FromArgb(220, 38, 38);
+            lblPasswordError.Location = new Point(100, 204);
+            lblPasswordError.Name = "lblPasswordError";
+            lblPasswordError.Size = new Size(183, 20);
+            lblPasswordError.TabIndex = 6;
+            lblPasswordError.Text = "Mật khẩu không được để trống";
             // 
             // lblConfirmPassword
             // 
             lblConfirmPassword.AutoSize = true;
-            lblConfirmPassword.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblConfirmPassword.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblConfirmPassword.ForeColor = Color.FromArgb(17, 24, 39);
-            lblConfirmPassword.Location = new Point(100, 221);
+            lblConfirmPassword.Location = new Point(100, 229);
             lblConfirmPassword.Name = "lblConfirmPassword";
-            lblConfirmPassword.Size = new Size(163, 23);
-            lblConfirmPassword.TabIndex = 5;
+            lblConfirmPassword.Size = new Size(153, 21);
+            lblConfirmPassword.TabIndex = 7;
             lblConfirmPassword.Text = "Xác nhận mật khẩu";
             // 
             // txtConfirmPassword
@@ -212,29 +241,40 @@
             txtConfirmPassword.CustomizableEdges = customizableEdges13;
             txtConfirmPassword.DefaultText = "";
             txtConfirmPassword.FocusedState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtConfirmPassword.Font = new Font("Segoe UI", 10F);
+            txtConfirmPassword.Font = new Font("Segoe UI", 9.5F);
             txtConfirmPassword.ForeColor = Color.Black;
             txtConfirmPassword.HoverState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtConfirmPassword.Location = new Point(100, 249);
+            txtConfirmPassword.Location = new Point(100, 254);
             txtConfirmPassword.Margin = new Padding(3, 4, 3, 4);
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PasswordChar = '*';
             txtConfirmPassword.PlaceholderText = "Nhập lại mật khẩu";
             txtConfirmPassword.SelectedText = "";
             txtConfirmPassword.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            txtConfirmPassword.Size = new Size(618, 40);
-            txtConfirmPassword.TabIndex = 6;
+            txtConfirmPassword.Size = new Size(618, 35);
+            txtConfirmPassword.TabIndex = 8;
             txtConfirmPassword.TextOffset = new Point(5, 0);
+            // 
+            // lblConfirmPasswordError
+            // 
+            lblConfirmPasswordError.AutoSize = true;
+            lblConfirmPasswordError.Font = new Font("Segoe UI", 8.5F);
+            lblConfirmPasswordError.ForeColor = Color.FromArgb(220, 38, 38);
+            lblConfirmPasswordError.Location = new Point(100, 291);
+            lblConfirmPasswordError.Name = "lblConfirmPasswordError";
+            lblConfirmPasswordError.Size = new Size(158, 20);
+            lblConfirmPasswordError.TabIndex = 9;
+            lblConfirmPasswordError.Text = "Vui lòng xác nhận mật khẩu";
             // 
             // lblFullName
             // 
             lblFullName.AutoSize = true;
-            lblFullName.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblFullName.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblFullName.ForeColor = Color.FromArgb(17, 24, 39);
-            lblFullName.Location = new Point(100, 299);
+            lblFullName.Location = new Point(100, 316);
             lblFullName.Name = "lblFullName";
-            lblFullName.Size = new Size(87, 23);
-            lblFullName.TabIndex = 7;
+            lblFullName.Size = new Size(82, 21);
+            lblFullName.TabIndex = 10;
             lblFullName.Text = "Họ và tên";
             // 
             // txtFullName
@@ -243,28 +283,39 @@
             txtFullName.CustomizableEdges = customizableEdges15;
             txtFullName.DefaultText = "";
             txtFullName.FocusedState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtFullName.Font = new Font("Segoe UI", 10F);
+            txtFullName.Font = new Font("Segoe UI", 9.5F);
             txtFullName.ForeColor = Color.Black;
             txtFullName.HoverState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtFullName.Location = new Point(100, 327);
+            txtFullName.Location = new Point(100, 341);
             txtFullName.Margin = new Padding(3, 4, 3, 4);
             txtFullName.Name = "txtFullName";
             txtFullName.PlaceholderText = "Nguyễn Văn A";
             txtFullName.SelectedText = "";
             txtFullName.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            txtFullName.Size = new Size(618, 40);
-            txtFullName.TabIndex = 8;
+            txtFullName.Size = new Size(618, 35);
+            txtFullName.TabIndex = 11;
             txtFullName.TextOffset = new Point(5, 0);
+            // 
+            // lblFullNameError
+            // 
+            lblFullNameError.AutoSize = true;
+            lblFullNameError.Font = new Font("Segoe UI", 8.5F);
+            lblFullNameError.ForeColor = Color.FromArgb(220, 38, 38);
+            lblFullNameError.Location = new Point(100, 378);
+            lblFullNameError.Name = "lblFullNameError";
+            lblFullNameError.Size = new Size(160, 20);
+            lblFullNameError.TabIndex = 12;
+            lblFullNameError.Text = "Họ tên không được để trống";
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblEmail.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblEmail.ForeColor = Color.FromArgb(17, 24, 39);
-            lblEmail.Location = new Point(100, 377);
+            lblEmail.Location = new Point(100, 403);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(198, 23);
-            lblEmail.TabIndex = 9;
+            lblEmail.Size = new Size(183, 21);
+            lblEmail.TabIndex = 13;
             lblEmail.Text = "Email (không bắt buộc)";
             // 
             // txtEmail
@@ -273,18 +324,28 @@
             txtEmail.CustomizableEdges = customizableEdges17;
             txtEmail.DefaultText = "";
             txtEmail.FocusedState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtEmail.Font = new Font("Segoe UI", 10F);
+            txtEmail.Font = new Font("Segoe UI", 9.5F);
             txtEmail.ForeColor = Color.Black;
             txtEmail.HoverState.BorderColor = Color.FromArgb(27, 77, 62);
-            txtEmail.Location = new Point(100, 405);
+            txtEmail.Location = new Point(100, 428);
             txtEmail.Margin = new Padding(3, 4, 3, 4);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "ten@mien.com";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            txtEmail.Size = new Size(618, 40);
-            txtEmail.TabIndex = 10;
+            txtEmail.Size = new Size(618, 35);
+            txtEmail.TabIndex = 14;
             txtEmail.TextOffset = new Point(5, 0);
+            // 
+            // lblEmailError
+            // 
+            lblEmailError.AutoSize = true;
+            lblEmailError.Font = new Font("Segoe UI", 8.5F);
+            lblEmailError.ForeColor = Color.FromArgb(220, 38, 38);
+            lblEmailError.Location = new Point(100, 465);
+            lblEmailError.Name = "lblEmailError";
+            lblEmailError.Size = new Size(0, 20);
+            lblEmailError.TabIndex = 15;
             // 
             // btnHuy
             // 
@@ -293,13 +354,13 @@
             btnHuy.BorderThickness = 1;
             btnHuy.CustomizableEdges = customizableEdges19;
             btnHuy.FillColor = Color.White;
-            btnHuy.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnHuy.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             btnHuy.ForeColor = Color.FromArgb(31, 41, 55);
-            btnHuy.Location = new Point(438, 470);
+            btnHuy.Location = new Point(438, 495);
             btnHuy.Name = "btnHuy";
             btnHuy.ShadowDecoration.CustomizableEdges = customizableEdges20;
             btnHuy.Size = new Size(130, 40);
-            btnHuy.TabIndex = 11;
+            btnHuy.TabIndex = 16;
             btnHuy.Text = "Huỷ";
             btnHuy.Click += btnHuy_Click;
             // 
@@ -308,13 +369,13 @@
             btnDangKy.BorderRadius = 6;
             btnDangKy.CustomizableEdges = customizableEdges21;
             btnDangKy.FillColor = Color.FromArgb(27, 111, 108);
-            btnDangKy.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDangKy.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             btnDangKy.ForeColor = Color.White;
-            btnDangKy.Location = new Point(588, 470);
+            btnDangKy.Location = new Point(588, 495);
             btnDangKy.Name = "btnDangKy";
             btnDangKy.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnDangKy.Size = new Size(130, 40);
-            btnDangKy.TabIndex = 12;
+            btnDangKy.TabIndex = 17;
             btnDangKy.Text = "Đăng ký";
             // 
             // lnkLogin
@@ -322,10 +383,10 @@
             lnkLogin.ActiveLinkColor = Color.FromArgb(27, 77, 62);
             lnkLogin.Font = new Font("Segoe UI", 9.5F);
             lnkLogin.LinkColor = Color.FromArgb(27, 111, 108);
-            lnkLogin.Location = new Point(100, 530);
+            lnkLogin.Location = new Point(100, 545);
             lnkLogin.Name = "lnkLogin";
             lnkLogin.Size = new Size(618, 25);
-            lnkLogin.TabIndex = 13;
+            lnkLogin.TabIndex = 18;
             lnkLogin.TabStop = true;
             lnkLogin.Text = "Đã có tài khoản? Đăng nhập";
             lnkLogin.TextAlign = ContentAlignment.MiddleCenter;
@@ -343,20 +404,25 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 246, 245);
-            ClientSize = new Size(818, 580);
+            ClientSize = new Size(818, 595);
             Controls.Add(panelTitle);
             Controls.Add(lnkLogin);
             Controls.Add(btnDangKy);
             Controls.Add(btnHuy);
             Controls.Add(txtEmail);
+            Controls.Add(lblEmailError);
             Controls.Add(lblEmail);
             Controls.Add(txtFullName);
+            Controls.Add(lblFullNameError);
             Controls.Add(lblFullName);
             Controls.Add(txtConfirmPassword);
+            Controls.Add(lblConfirmPasswordError);
             Controls.Add(lblConfirmPassword);
             Controls.Add(txtPassword);
+            Controls.Add(lblPasswordError);
             Controls.Add(lblPassword);
             Controls.Add(txtUsername);
+            Controls.Add(lblUsernameError);
             Controls.Add(lblUsername);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormDangKi";
@@ -376,14 +442,19 @@
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBoxMinimize;
         private Label lblTitle;
         private Label lblUsername;
+        private Label lblUsernameError;
         private Guna.UI2.WinForms.Guna2TextBox txtUsername;
         private Label lblPassword;
+        private Label lblPasswordError;
         private Guna.UI2.WinForms.Guna2TextBox txtPassword;
         private Label lblConfirmPassword;
+        private Label lblConfirmPasswordError;
         private Guna.UI2.WinForms.Guna2TextBox txtConfirmPassword;
         private Label lblFullName;
+        private Label lblFullNameError;
         private Guna.UI2.WinForms.Guna2TextBox txtFullName;
         private Label lblEmail;
+        private Label lblEmailError;
         private Guna.UI2.WinForms.Guna2TextBox txtEmail;
         private Guna.UI2.WinForms.Guna2Button btnHuy;
         private Guna.UI2.WinForms.Guna2Button btnDangKy;

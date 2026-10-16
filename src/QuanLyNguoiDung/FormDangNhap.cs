@@ -17,7 +17,7 @@ namespace QuanLyNguoiDung
 
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-                        FormDangKi frmRegister = new FormDangKi();
+            FormDangKi frmRegister = new FormDangKi();
             this.Hide();
             frmRegister.ShowDialog();
             this.Show();
