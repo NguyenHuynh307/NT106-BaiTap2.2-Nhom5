@@ -1,7 +1,3 @@
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-
 namespace QuanLyNguoiDung
 {
     internal static class Program
@@ -9,19 +5,27 @@ namespace QuanLyNguoiDung
         [STAThread]
         private static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            ApplicationConfiguration.Initialize();
 
-            var form = new Form
-            {
-                Text = "NT106 - Bai tap 2.2 - Nhom 5",
-                StartPosition = FormStartPosition.CenterScreen,
-                Width = 900,
-                Height = 560,
-                MinimumSize = new Size(640, 400)
-            };
+            Application.SetUnhandledExceptionMode(
+                UnhandledExceptionMode.CatchException);
 
-            Application.Run(form);
+            Application.ThreadException += (sender, args) =>
+                HienLoiChung();
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+                HienLoiChung();
+
+            Application.Run(new FrmDangNhap());
+        }
+
+        private static void HienLoiChung()
+        {
+            MessageBox.Show(
+                "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.",
+                "Thông báo",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
         }
     }
 }
