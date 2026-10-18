@@ -1,0 +1,33 @@
+CA KIỂM THỬ TC03 — MẬT KHẨU XÁC NHẬN KHÔNG KHỚP
+
+Mục đích
+Xác nhận biểu mẫu phát hiện mật khẩu và mật khẩu xác nhận khác nhau trước khi ghi dữ liệu.
+
+Điều kiện trước
+- Ứng dụng đang chạy; mở được màn hình Đăng ký.
+
+Dữ liệu kiểm thử
+- Tên đăng nhập: test_ca1_001
+- Họ tên: Nguyen Van Test
+- Mật khẩu: nhập một giá trị thử nghiệm
+- Xác nhận mật khẩu: nhập giá trị khác với mật khẩu
+- Email: test_ca1_001@example.com (nếu có trường Email)
+
+Các bước thực hiện
+1. Mở màn hình Đăng ký.
+2. Nhập các trường hợp lệ, ngoại trừ trường xác nhận mật khẩu khác mật khẩu.
+3. Nhấn Đăng ký và quan sát vị trí hiển thị lỗi.
+4. Ghi lại số dòng của test_ca1_001 trước khi thử; sau thao tác kiểm tra số dòng không tăng.
+
+Kết quả mong đợi
+- Hiển thị lỗi tại trường xác nhận mật khẩu hoặc thông báo tương đương rõ ràng.
+- Không chuyển sang trạng thái đăng ký thành công.
+- Không thêm bản ghi mới; số dòng của test_ca1_001 giữ nguyên so với trước khi thử.
+
+Truy vấn đối chiếu tùy chọn
+-- Ghi COUNT(*) trước và sau TC03; số bản ghi phải không tăng.
+SELECT COUNT(*) AS SoLuong
+FROM dbo.Users WHERE TenDangNhap = N'test_ca1_001';
+
+Minh chứng
+Đính kèm ảnh màn hình lỗi xác nhận mật khẩu ở TC03 trong báo cáo nhóm. Chỉ ghi ĐẠT sau khi chạy thử thực tế.

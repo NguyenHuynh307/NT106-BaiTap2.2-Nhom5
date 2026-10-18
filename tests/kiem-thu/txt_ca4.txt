@@ -1,0 +1,27 @@
+CA KIỂM THỬ TC04 — BỎ TRỐNG TRƯỜNG BẮT BUỘC
+
+Mục đích
+Xác nhận mỗi trường bắt buộc được kiểm tra riêng và giao diện hướng người dùng đến trường cần sửa.
+
+Điều kiện trước
+- Ứng dụng đang chạy; mở được màn hình Đăng ký.
+
+Các bước thực hiện
+Lặp lại kiểm tra, mỗi lượt chỉ để trống một trường bắt buộc và điền hợp lệ các trường còn lại:
+1. Bỏ trống Tên đăng nhập rồi nhấn Đăng ký.
+2. Bỏ trống Họ tên (nếu bắt buộc) rồi nhấn Đăng ký.
+3. Bỏ trống Mật khẩu rồi nhấn Đăng ký.
+4. Bỏ trống Xác nhận mật khẩu rồi nhấn Đăng ký.
+5. Kiểm tra các trường bắt buộc khác theo biểu mẫu và lặp lại tương tự.
+
+Kết quả mong đợi
+- Mỗi lượt đều bị từ chối; không ghi tài khoản thiếu dữ liệu vào cơ sở dữ liệu.
+- Thông báo lỗi/nhãn lỗi chỉ đúng trường đang thiếu.
+- Focus chuyển đến trường cần nhập nếu đây là hành vi được triển khai trong giao diện.
+- Không đánh dấu ĐẠT nếu chưa thử lần lượt từng trường bắt buộc.
+
+Truy vấn đối chiếu tùy chọn
+Với từng tên đăng nhập dùng trong các lượt thử, kiểm tra không có bản ghi tương ứng trong dbo.Users.
+
+Minh chứng
+Đính kèm ảnh minh chứng cho các trường hợp bỏ trống trong mục TC04 của báo cáo nhóm. Nếu không thể thể hiện tất cả trong một ảnh, dùng nhiều ảnh có chú thích trường được bỏ trống. Chỉ ghi ĐẠT sau khi chạy thử thực tế.
