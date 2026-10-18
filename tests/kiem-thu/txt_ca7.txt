@@ -1,0 +1,30 @@
+CA KIỂM THỬ TC07 — TÊN ĐĂNG NHẬP KHÔNG TỒN TẠI
+
+Mục đích
+Xác nhận hệ thống từ chối tài khoản không tồn tại và dùng cùng thông báo chung như trường hợp mật khẩu sai.
+
+Điều kiện trước
+- SQL Server đang hoạt động.
+- Xác nhận tên đăng nhập bên dưới chưa có trong dbo.Users.
+
+Dữ liệu kiểm thử
+- Tên đăng nhập: user_khong_ton_tai_9 (20 ký tự, phù hợp giới hạn ô nhập 20 ký tự)
+- Mật khẩu: Test@12345
+
+Các bước thực hiện
+1. Mở màn hình Đăng nhập.
+2. Nhập tên đăng nhập không tồn tại và mật khẩu bất kỳ.
+3. Nhấn Đăng nhập.
+4. So sánh nguyên văn thông báo với kết quả TC06.
+
+Kết quả mong đợi
+- Không đăng nhập được và không mở Form Trang Chính.
+- Thông báo giống hệt TC06 (đúng tên, sai mật khẩu).
+- Ứng dụng vẫn hoạt động bình thường và không tiết lộ tài khoản có tồn tại hay không.
+
+Truy vấn đối chiếu tùy chọn
+SELECT COUNT(*) AS SoLuong
+FROM dbo.Users WHERE TenDangNhap = N'user_khong_ton_tai_9';
+
+Minh chứng
+Đính kèm ảnh thông báo ở TC07 trong báo cáo nhóm và đặt cạnh ảnh TC06 để đối chiếu. Chỉ ghi ĐẠT sau khi chạy thử thực tế.

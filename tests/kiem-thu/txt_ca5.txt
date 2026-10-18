@@ -1,0 +1,26 @@
+CA KIỂM THỬ TC05 — ĐĂNG NHẬP THÀNH CÔNG
+
+Mục đích
+Xác nhận người dùng có tài khoản hợp lệ đăng nhập được và màn hình chính hiển thị dữ liệu phù hợp.
+
+Điều kiện trước
+- SQL Server đang hoạt động và chứa tài khoản được tạo ở TC01.
+- Đã biết thông tin đăng nhập thử nghiệm của tài khoản TC01.
+
+Dữ liệu kiểm thử
+- Tên đăng nhập: test_ca1_001
+- Mật khẩu: giá trị đúng đã dùng để đăng ký test_ca1_001 ở TC01 (giữ ngoài repo)
+
+Các bước thực hiện
+1. Mở màn hình Đăng nhập.
+2. Nhập đúng tên đăng nhập và mật khẩu đã đăng ký.
+3. Nhấn Đăng nhập (hoặc Enter nếu được thiết kế hỗ trợ).
+4. Quan sát kết quả và dữ liệu hiển thị ở màn hình chính.
+
+Kết quả mong đợi
+- Xác thực thành công và mở Form Trang Chính.
+- Thông tin hiển thị lấy từ tài khoản/cơ sở dữ liệu, không phải dữ liệu giả cố định.
+- Ứng dụng không báo lỗi đăng nhập hoặc lỗi kết nối khi SQL Server đang hoạt động.
+
+Minh chứng
+Đính kèm ảnh màn hình sau khi đăng nhập thành công ở TC05 trong báo cáo nhóm; nên thể hiện Form Trang Chính. Chỉ ghi ĐẠT sau khi chạy thử thực tế.

@@ -1,0 +1,33 @@
+CA KIỂM THỬ TC01 — ĐĂNG KÝ TÀI KHOẢN HỢP LỆ
+
+Mục đích
+Xác nhận người dùng có thể tạo tài khoản mới với dữ liệu hợp lệ và thông tin được lưu vào SQL Server.
+
+Điều kiện trước
+- Ứng dụng đang chạy và kết nối được SQL Server.
+- Tên đăng nhập test_ca1_001 chưa tồn tại trong dbo.Users.
+
+Dữ liệu kiểm thử
+- Tên đăng nhập: test_ca1_001
+- Họ tên: Nguyen Van A
+- Email: test_ca1_001@example.com (nếu trường Email có trong biểu mẫu)
+- Mật khẩu: giá trị thử nghiệm đã dùng để tạo test_ca1_001 (không ghi mật khẩu thật vào repo)
+- Xác nhận mật khẩu: nhập lại đúng giá trị thử nghiệm đã chọn
+
+Các bước thực hiện
+1. Mở màn hình Đăng ký.
+2. Nhập tất cả trường bắt buộc bằng dữ liệu trên.
+3. Nhấn Đăng ký và quan sát thông báo.
+4. Kiểm tra dbo.Users theo tên đăng nhập test_ca1_001.
+
+Kết quả mong đợi
+- Ứng dụng thông báo đăng ký thành công và điều hướng theo thiết kế.
+- dbo.Users tăng đúng 1 bản ghi cho test_ca1_001.
+- MatKhauBam không chứa mật khẩu nguyên văn; Salt được lưu cùng bản ghi.
+
+Truy vấn đối chiếu tùy chọn
+SELECT UserId, TenDangNhap, MatKhauBam, Salt
+FROM dbo.Users WHERE TenDangNhap = N'test_ca1_001';
+
+Minh chứng
+Đính kèm ảnh màn hình kết quả TC01 trong báo cáo nhóm; ảnh cần thể hiện thông báo thành công. Chỉ ghi ĐẠT sau khi chạy thử thực tế.

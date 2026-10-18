@@ -1,0 +1,33 @@
+CA KIỂM THỬ TC02 — ĐĂNG KÝ TRÙNG TÊN ĐĂNG NHẬP
+
+Mục đích
+Xác nhận hệ thống ngăn tạo hai tài khoản có cùng tên đăng nhập.
+
+Điều kiện trước
+- SQL Server đang hoạt động.
+- Tài khoản test_ca1_001 đã tồn tại (có thể thực hiện TC01 trước).
+
+Dữ liệu kiểm thử
+- Tên đăng nhập: test_ca1_001 (trùng tài khoản đã có)
+- Họ tên: Nguyen Van Khac
+- Mật khẩu: nhập giá trị hợp lệ
+- Xác nhận mật khẩu: trùng với mật khẩu đã nhập
+- Email: test_ca1_002@example.com (nếu có trường Email)
+
+Các bước thực hiện
+1. Mở màn hình Đăng ký.
+2. Nhập dữ liệu hợp lệ nhưng dùng lại tên đăng nhập test_ca1_001.
+3. Nhấn Đăng ký.
+4. Kiểm tra thông báo và số bản ghi có tên đăng nhập đó trong dbo.Users.
+
+Kết quả mong đợi
+- Ứng dụng thông báo tên đăng nhập đã tồn tại hoặc thông báo tương đương theo thiết kế.
+- Không tạo thêm bản ghi; số dòng cho test_ca1_001 vẫn là 1.
+- Ứng dụng không bị dừng do lỗi UNIQUE từ SQL Server.
+
+Truy vấn đối chiếu tùy chọn
+SELECT COUNT(*) AS SoLuong
+FROM dbo.Users WHERE TenDangNhap = N'test_ca1_001';
+
+Minh chứng
+Đính kèm ảnh màn hình thông báo trùng tên đăng nhập ở TC02 trong báo cáo nhóm. Chỉ ghi ĐẠT sau khi chạy thử thực tế.

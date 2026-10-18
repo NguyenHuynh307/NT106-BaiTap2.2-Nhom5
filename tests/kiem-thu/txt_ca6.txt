@@ -1,0 +1,27 @@
+CA KIỂM THỬ TC06 — TÊN ĐÚNG, MẬT KHẨU SAI
+
+Mục đích
+Xác nhận hệ thống từ chối mật khẩu sai và không tiết lộ thông tin nhạy cảm.
+
+Điều kiện trước
+- SQL Server đang hoạt động.
+- Tài khoản test_ca1_001 đã tồn tại.
+
+Dữ liệu kiểm thử
+- Tên đăng nhập: test_ca1_001
+- Mật khẩu: SaiMatKhau@123
+
+Các bước thực hiện
+1. Mở màn hình Đăng nhập.
+2. Nhập tên đăng nhập đúng và mật khẩu sai.
+3. Nhấn Đăng nhập.
+4. Ghi nhận thông báo, trạng thái ô mật khẩu và trạng thái ứng dụng.
+
+Kết quả mong đợi
+- Không đăng nhập được và không mở Form Trang Chính.
+- Thông báo chung giống hệt thông báo ở TC07 (tài khoản không tồn tại), tránh tiết lộ username có hợp lệ hay không.
+- Ô mật khẩu được xóa sau lỗi nếu đó là hành vi được triển khai trong giao diện.
+- Ứng dụng vẫn hoạt động bình thường.
+
+Minh chứng
+Đính kèm ảnh thông báo đăng nhập thất bại ở TC06 trong báo cáo nhóm. Đối chiếu nguyên văn thông báo với ảnh TC07. Chỉ ghi ĐẠT sau khi chạy thử thực tế.
