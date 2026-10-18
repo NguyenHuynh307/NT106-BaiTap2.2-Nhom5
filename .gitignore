@@ -1,4 +1,4 @@
-# Build outputs
+﻿# Build outputs
 [Bb]in/
 [Oo]bj/
 [Dd]ebug/
@@ -29,7 +29,6 @@ project.fragment.lock.json
 **/*.secrets.json
 **/secrets.json
 **/connectionstrings.local.json
-**/ConnectionStrings.local.json
 
 # Allow safe example settings to be committed
 !**/appsettings.example.json
