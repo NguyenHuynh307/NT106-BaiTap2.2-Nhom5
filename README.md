@@ -20,14 +20,15 @@
 | Lê Trọng Phú | Thành viên | Xử lý nút Đăng ký, Đăng nhập |
 
 ## Cấu trúc
-├── databaseUser.sql Script tạo cơ sở dữ liệu
+
+```
+├── databaseUser.sql               Script tạo cơ sở dữ liệu
 └── src/QuanLyNguoiDung/
-├── Frm*.cs Các form giao diện
-├── Data/ Truy cập cơ sở dữ liệu
-├── security/ Xử lý mật khẩu
-└── appsettings.example.json Mẫu cấu hình
-
-
+    ├── Frm*.cs                    Các form giao diện
+    ├── Data/                      Truy cập cơ sở dữ liệu
+    ├── security/                  Xử lý mật khẩu
+    └── appsettings.example.json   Mẫu cấu hình
+```
 ## Cách chạy
 
 1. Chạy `databaseUser.sql` trong SQL Server Management Studio.
